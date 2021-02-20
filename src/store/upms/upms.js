@@ -1,4 +1,4 @@
-import {getData,postData,putData} from "../../utils/http";
+import {getData,postData,putData,deleteData} from "../../utils/http";
 import {
     saveBylocalStorage,
 	returnBylocalStorageData,
@@ -11,7 +11,7 @@ export default {
         //用户登录标识
         userLoginState:"",
         //信息
-        userName: "",
+        userName: ""
 	},
 	mutations: {
         //写入用户登录数据
@@ -25,23 +25,6 @@ export default {
             saveBylocalStorage("DES_BOOTSTRAP_INFO","");
             saveBylocalStorage("DES_BOOTSTRAP_STATE","");
 			state.userLoginState="";
-			
-			//信息
-			state.userName="";
-			state.idNumber="";
-			state.userAvatar="";
-			state.realName="";
-			state.realNameState=null;
-			state.bankCardState=null;
-			state.weChatState=null;
-			state.orgName="";
-			state.orgPhone="";
-			state.orgPosition="";
-			state.investmentAccount=null;
-			state.tradeAccount=null;
-			state.userAvatar=userAvatar;
-			state.nickname="";
-
         },
         //刷新登陆状态
         RELOAD_LOGIN_STATE(state){
@@ -73,9 +56,8 @@ export default {
         //退出登录
         loginOut({commit}){
 			return new Promise((resolve)=>{
-				var loginInfo=returnBylocalStorageData("DES_BOOTSTRAP_INFO");
 				if(loginInfo&&loginInfo.access_token){
-					postData("upms/logout?accessToken="+loginInfo.access_token).then((res)=>{
+					deleteData("user/token/id").then((res)=>{
 						commit("LOGINOUT");
 						if(res.state==1){
 							resolve({

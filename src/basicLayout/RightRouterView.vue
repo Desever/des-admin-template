@@ -1,6 +1,11 @@
 <template>
 	<div class="right-router-view">
-		<router-view />
+		<transition 
+		name="custom-classes-transition"
+		enter-active-class="animated fadeIn"
+		leave-active-class="animated fadeOut">
+			<router-view />
+		</Transition>
 	</div>
 </template>
 
@@ -15,6 +20,6 @@ export default {
 	flex:1;
 	padding:20px;
 	overflow: hidden;
-	overflow-y:auto;
+	position:relative;
 }
 </style>

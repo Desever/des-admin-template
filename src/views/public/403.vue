@@ -1,7 +1,5 @@
 <template>
-	<div class="des-menu-box">
-		
-	</div>
+  <div>403</div>
 </template>
 
 <script>

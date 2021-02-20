@@ -78,6 +78,7 @@ export function returnBySessionStorage(key){
             return null;
         }
     } catch (error) {
+		console.error(error);
         alert("出现一个缓存错误,请联系管理员"+key);
     }
 }

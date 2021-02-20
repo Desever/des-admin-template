@@ -20,4 +20,14 @@ html,body{
 	height:100%;
 	overflow: hidden;
 }
+.public-page{
+	position:absolute;
+	left:0px;
+	top:0px;
+	right:0px;
+	bottom:0px;
+	overflow: hidden;
+	overflow-y: auto;
+	padding:30px;
+}
 </style>

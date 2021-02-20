@@ -1,12 +1,10 @@
 <style lang="scss">
 @import "./login.scss";
-@import "/assets/style/animate.min.css";
 </style>
 
 <template>
   <div :class="loginClass">
     <div class="modal"></div>
-
     <div class="login-box">
         <el-form ref="loginForm" :model="loginData" style="width:100%;">
             <div style="padding-bottom:20px;padding-top:60px;">
@@ -71,6 +69,7 @@ export default {
 				if (valid) {
 					this.loginClass="des-login activeLogin";
 					var loginRes=await this.$store.dispatch("upms/userLogin",this.loginData);
+					await this.$store.dispatch("app/getMenuList");
 					this.loginClass="des-login";
 					if(loginRes.state==1){
 						this.$notify({
@@ -79,12 +78,13 @@ export default {
 							type: 'success'
 						});
 						this.$router.replace({
-							name:"Home"
+							name:"home"
 						});
 					}else{
-						this.$notify.error({
+						this.$notify({
 							title: '提示',
-							message:loginRes.msg
+							message:loginRes.msg,
+							type: 'error'
 						});
 					}
 				}

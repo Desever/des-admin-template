@@ -9,6 +9,18 @@ export function getUserRole(){
 		return [];
 	}
 }
+
+//获取用户当前机构
+export function getUserOrg(){
+	var userInfo=returnBylocalStorageData("DES_BOOTSTRAP_INFO");
+	if(userInfo){
+		return userInfo.org;
+	}else{
+		return null;
+	}
+}
+
+
 //获取token
 export function getToken(){
 	var userInfo=returnBylocalStorageData("DES_BOOTSTRAP_INFO");

@@ -1,8 +1,8 @@
 <template>
-	<div class="qy-app-container">
-		<Nav @changeCollapse="changeCollapse"></Nav>
-		<div class="qy-center-render">
-			<LeftMenu :isCollapse="isCollapse"></LeftMenu>
+	<div class="qy-app-container" v-loading="menuLoading">
+		<LeftMenu v-if="!menuLoading"></LeftMenu>
+		<div v-if="!menuLoading" class="qy-center-render">
+			<Nav></Nav>
 			<RightRouterView></RightRouterView>
 		</div>
 	</div>
@@ -15,20 +15,18 @@ import LeftMenu from "./LeftMenu";
 //右边路由容器
 import RightRouterView from "./RightRouterView";
 export default {
-	data(){
-		return {
-			isCollapse:false,
-		}
-	},
 	components:{
 		LeftMenu,
 		Nav,
 		RightRouterView
 	},
-	methods:{
-		changeCollapse(){
-			this.isCollapse=!this.isCollapse;
+	computed:{
+		menuLoading(){
+			return this.$store.state.app.menuLoading;
 		}
+	},
+	created(){
+		this.$store.dispatch("app/getMenuList");
 	}
 }
 </script>
@@ -39,11 +37,11 @@ export default {
 	height:100%;
 	overflow: hidden;
 	display: flex;
-	flex-direction: column;
 	.qy-center-render{
 		flex:1;
 		overflow: hidden;
 		display:flex;
+		flex-direction:column;
 	}
 }
 </style>
